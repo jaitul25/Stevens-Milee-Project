@@ -7,7 +7,7 @@ This repository contains integrated code for the project. There are two main fol
 
 3. **API Endpoints** : APIs are hosted on Amazon EC2. 
 
-**Link to REST API Endpoints Documentation**: http://ec2-3-138-139-116.us-east-2.compute.amazonaws.com:1426/stevens/swagger-ui.html
+4. **Link to REST API Endpoints Documentation**: http://ec2-3-138-139-116.us-east-2.compute.amazonaws.com:1426/stevens/swagger-ui.html
 
 
 ## Build Instructions
