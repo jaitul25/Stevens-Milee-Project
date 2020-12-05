@@ -11,20 +11,38 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
     integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
   <link href="/css/coursedetails.css" rel="stylesheet">
+  <script src="/js/coursedetails.js"></script>
+  <style>
+    .btn-lg{
+        padding-right: 21px;
+        padding-left: 20px;
+        font-size: 20px;
+        margin-top: 10px;
+    }
+</style>
 </head>
 
-<body>
+<body ng-app="StevensMilee" ng-controller="CourseDetailsCtrl">
+  <div id="mydiv" ng-hide="!saved">
+    <img src="http://code.jquery.com/mobile/1.4.2/images/ajax-loader.gif" class="ajax-loader" />
+  </div>
+
   <!--Navbar-->
   <nav class="navbar navbar-inverse">
+    <button type="button" class="btn btn-info float-right btn-lg" ng-click="logoutUser();">
+      <span class="glyphicon glyphicon-log-out"></span> Log out
+    </button>
     <div class="container-fluid">
       <div class="navbar-header">
         <h4 class="b" href="#">Stevens Milee</h4>
+        
       </div>
-
     </div>
   </nav>
 
+  
 
   <div class="container">
     <div class="col-md-6">
@@ -39,27 +57,19 @@
     </div>
 
     <div class="col-md-6">
-      <h4 class="courseName">Course Name: SSW 564 Fundamentals of Software Engineering</h4>
+      <h4 class="courseName">Course Name: {{courseDetails.name}}</h4>
     </div>
 
     <!--Professor Information-->
     <div class="col-md-6">
       <h4 class="profName">Professor: <a href="professor.html">
-          <p class="desc">Dr. Roberta Cohen
+          <p class="desc">{{professorInfo.name}}
         </a></p>
       </h4>
-      <h4 class="profName">Teaching Mode: <p class="desc">On-campus/Web</p>
+      <h4 class="profName">Teaching Mode: <p class="desc">{{courseDetails.teachingMode}}</p>
       </h4>
-      <h4 class="profName">Course Description: <p class="desc">This course introduces the subject of software
-          engineering, also known as software development process
-          or software development best practice from a quantitative, i.e., analytic- and metrics-based point of view.
-          Topics include introductions to: software life-cycle process models from the heaviest weight, used on very
-          large
-          projects, to the lightest weight, e.g., extreme programming; industry-standard software engineering tools;
-          teamwork; project planning and management; object-oriented analysis and design. The course is case history and
-          project oriented.</p>
+      <h4 class="profName">Course Description: <p class="desc">{{courseDetails.description}}</p>
       </h4>
-
     </div>
 
     <!--Comments Section-->
@@ -68,34 +78,31 @@
         <h4 class="commentName">Add comments:</h4>
       </div>
 
-      <div class="alert alert-primary n" role="alert">
-        Lots of new things to learn in this course.
-      </div>
-
-      <div class="alert alert-primary s" role="alert">
-        Assignments are well aligned with course
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <input type="email" class="form-control" placeholder="Your review?">
-            </div>
-            <div class="panel-footer">
-
-
-              <div class="pull-right">
-                <button type="button" class="btn btn-success">Post</button>
+      <div class="container">
+        <div class="column">
+          <div class="col-md-8">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <input id="reviewField" type="text" class="form-control" placeholder="Your review?" ng-model="reviewDesc">
+              </div>
+              <div class="panel-footer">
+  
+  
+                <div class="pull-right">
+                  <button type="button" class="btn btn-success" ng-click="postReview();">Post</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
+    <div ng-repeat="review in reviews">
+      <div class="alert alert-primary n" role="alert">
+        {{review.description}}
+      </div>
+    </div>
 </body>
 
 <!---JS files -->
